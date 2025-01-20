@@ -1,0 +1,68 @@
+openapi: "3.0.2"
+info:
+  title: BFF API
+  version: "0.0.1"
+servers:
+  - url: http://localhost:3000/api
+    description: Development server
+paths:
+  /projects:
+    get:
+      summary: Returns a list of projects.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Project"
+                  tags:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Tag"
+
+# Schemas
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The project ID.
+          example: "f5417143-c1f8-47e9-bd56-8bd31a50756a"
+        title:
+          type: string
+          description: The project title.
+          example: "Project X"
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/TagId"
+          description: The tags project has.
+          example: ["f5417143-c1f8-47e9-bd56-8bd31a50756a"]
+        starts_at:
+          type: number
+          description: The date project starts.
+          example: 1737380060
+        ends_at:
+          type: number
+          description: The date projects ends.
+          example: 1737380060
+    TagId:
+      type: string
+      description: The tag ID.
+      example: "f5417143-c1f8-47e9-bd56-8bd31a50756a"
+    Tag:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/TagId"
+        title:
+          type: string
+          description: The tag title.
