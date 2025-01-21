@@ -1,14 +1,12 @@
 openapi: "3.0.2"
 info:
-  title: BFF API
-  version: "0.0.1"
+  title: API Title
+  version: "1.0"
 servers:
-  - url: http://localhost:3000/api
-    description: Development server
+  - url: https://api.server.test/v1
 paths:
   /projects:
     get:
-      summary: Returns a list of projects.
       responses:
         "200":
           description: OK
@@ -17,11 +15,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  projects:
+                  list:
                     type: array
                     items:
                       $ref: "./../backend/schemas.yaml#/Project"
-                  tags:
-                    type: array
-                    items:
-                      $ref: "./../backend/schemas.yaml#/Tag"
