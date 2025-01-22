@@ -1,0 +1,16 @@
+Transform: AWS::Serverless-2016-10-31
+
+#https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/sam-specification-template-anatomy-globals.html
+Globals:
+  Function:
+    Architectures:
+      - arm64
+    Handler: app.py
+    MemorySize: 128
+    Runtime: python3.13
+    Timeout: 30
+
+#https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html
+Resources:
+  PostProject:
+    Type: AWS::Serverless::Function
