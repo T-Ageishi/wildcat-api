@@ -1,3 +1,4 @@
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 
 #https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/sam-specification-template-anatomy-globals.html
@@ -5,12 +6,31 @@ Globals:
   Function:
     Architectures:
       - arm64
-    Handler: app.py
+    Handler: app.lambda_handler
     MemorySize: 128
     Runtime: python3.13
     Timeout: 30
 
+Parameters:
+  Env:
+    Type: String
+    AllowedValues:
+      - dev
+      - prod
+    Default: dev
+
 #https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html
 Resources:
-  PostProject:
+  ProjectPost:
     Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/project-api-post
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Env
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+#            Location:
