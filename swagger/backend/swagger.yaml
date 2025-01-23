@@ -19,3 +19,17 @@ paths:
                     type: array
                     items:
                       $ref: "./../backend/schemas.yaml#/Project"
+  /tags:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: "./../backend/schemas.yaml#/Tag"
