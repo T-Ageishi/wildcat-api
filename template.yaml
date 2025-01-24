@@ -6,9 +6,9 @@ Globals:
   Function:
     Architectures:
       - arm64
-    Handler: app.lambda_handler
+    Handler: app.lambdaHandler
     MemorySize: 128
-    Runtime: python3.13
+    Runtime: nodejs22.x
     Timeout: 30
 
 Parameters:
@@ -21,16 +21,42 @@ Parameters:
 
 #https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html
 Resources:
-  ProjectPost:
+  #########################################
+  # Lambda Functions
+  #########################################
+  ProjectsApiGet:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: functions/project-api-post
+      FunctionName: !Sub "${AWS::StackName}-ProjectsApiGet"
+      CodeUri: functions/projects-api-get
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /projects
+            Method: get
+            RestApiId: !Ref ApiGateway
+  ProjectsApiGetLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ProjectsApiGet}
+      RetentionInDays: 30
+
+  #########################################
+  # API Gateway
+  #########################################
   ApiGateway:
     Type: AWS::Serverless::Api
     Properties:
+      Name: !Sub "${AWS::StackName}-ApiGateway"
       StageName: !Ref Env
+      EndpointConfiguration:
+        Type: PRIVATE
+      OpenApiVersion: "3.0.2"
       DefinitionBody:
         Fn::Transform:
           Name: AWS::Include
           Parameters:
+#            @@todo swagger.yamlへのパスを記載
 #            Location:
+
