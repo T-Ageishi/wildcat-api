@@ -50,5 +50,5 @@ components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
-      name: X-Api-Key
+      name: X-API-KEY
       in: header
