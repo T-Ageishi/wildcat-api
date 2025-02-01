@@ -9,6 +9,7 @@ paths:
   /projects:
     get:
       summary: Returns a list of projects.
+      operationId: getProjects
       responses:
         "200":
           description: OK
@@ -25,3 +26,5 @@ paths:
                     type: array
                     items:
                       $ref: "./schemas.yaml#/Tag"
+        "4XX":
+          description: "Client error"
