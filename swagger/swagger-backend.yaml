@@ -10,6 +10,7 @@ servers:
 paths:
   /projects:
     get:
+      summary: Returns a list of projects.
       operationId: getProjects
       responses:
         "200":
@@ -27,6 +28,7 @@ paths:
           description: "Client error"
   /tags:
     get:
+      summary: Returns a list of tags.
       operationId: getTags
       responses:
         "200":
