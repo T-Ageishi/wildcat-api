@@ -20,8 +20,8 @@ paths:
                   projects:
                     type: array
                     items:
-                      $ref: "./../backend/schemas.yaml#/Project"
+                      $ref: "./schemas.yaml#/Project"
                   tags:
                     type: array
                     items:
-                      $ref: "./../backend/schemas.yaml#/Tag"
+                      $ref: "./schemas.yaml#/Tag"
