@@ -2,6 +2,9 @@ openapi: "3.0.2"
 info:
   title: BFF API
   version: "0.0.1"
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: http://127.0.0.1:3000/api
     description: Development server
