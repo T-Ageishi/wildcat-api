@@ -33,3 +33,5 @@ paths:
                     type: array
                     items:
                       $ref: "./schemas.yaml#/Tag"
+        "4XX":
+          description: "Client error"
